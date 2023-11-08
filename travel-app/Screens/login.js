@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styles from "./style";
 import {
@@ -11,12 +11,23 @@ import {
   View,
 } from "react-native";
 import { Button, SocialIcon } from "react-native-elements";
-import * as Facebook from "expo-facebook";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const appId = "1047121222092614";
 
 export default function LoginScreen() {
-  const onLoginPress = () => {};
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onLoginPress = async () => {
+    if (email && password) {
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+      } catch (err) {
+        console.log("got error: ", err.message);
+      }
+    }
+  };
 
   const onFbLoginPress = async () => {
     Alert.alert(
@@ -49,11 +60,15 @@ export default function LoginScreen() {
             <TextInput
               placeholder="Username"
               placeholderColor="#c4c3cb"
+              value={email}
+              onChangeText={(value) => setEmail(value)}
               style={styles.loginFormTextInput}
             />
             <TextInput
               placeholder="Password"
               placeholderColor="#c4c3cb"
+              value={password}
+              onChangeText={(value) => setPassword(value)}
               style={styles.loginFormTextInput}
               secureTextEntry={true}
             />
