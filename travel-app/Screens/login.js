@@ -13,13 +13,10 @@ import {
 import { Button, SocialIcon } from "react-native-elements";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const appId = "1047121222092614";
-const Stack = createNativeStackNavigator();
 
-function HomeScreen() {
+export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -54,6 +51,7 @@ function HomeScreen() {
     //   Alert.alert(`Facebook Login Error: ${message}`);
     // }
   };
+
   return (
     <KeyboardAvoidingView style={styles.containerView} behavior="padding">
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -90,24 +88,5 @@ function HomeScreen() {
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
-  );
-}
-
-function DetailsScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Details Screen</Text>
-    </View>
-  );
-}
-
-export default function LoginScreen() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
   );
 }
