@@ -16,7 +16,7 @@ import { auth } from "../config/firebase";
 
 const appId = "1047121222092614";
 
-export default function LoginScreen() {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -28,28 +28,6 @@ export default function LoginScreen() {
         console.log("got error: ", err.message);
       }
     }
-  };
-
-  const onFbLoginPress = async () => {
-    Alert.alert(
-      `Please use our React Native Starer Kit instead. You can download it for free at https://instamobile.io`
-    );
-    // try {
-    //   await Facebook.initializeAsync({
-    //     appId,
-    //   });
-    //   const { type, token } = await Facebook.logInWithReadPermissionsAsync({
-    //     permissions: ["public_profile", "email"],
-    //   });
-    //   if (type === "success") {
-    //     const response = await fetch(
-    //       `https://graph.facebook.com/me?access_token=${token}`
-    //     );
-    //     Alert.alert("Logged in!", `Hi ${(await response.json()).name}!`);
-    //   }
-    // } catch ({ message }) {
-    //   Alert.alert(`Facebook Login Error: ${message}`);
-    // }
   };
 
   return (
@@ -75,7 +53,7 @@ export default function LoginScreen() {
             />
             <Button
               buttonStyle={styles.loginButton}
-              onPress={() => onLoginPress()}
+              onPress={() => navigation.navigate("Main")}
               title="Login"
             />
             <Button
@@ -89,4 +67,6 @@ export default function LoginScreen() {
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
-}
+};
+
+export default LoginScreen;
