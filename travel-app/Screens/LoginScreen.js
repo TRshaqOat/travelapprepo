@@ -53,7 +53,9 @@ const LoginScreen = ({ navigation }) => {
             />
             <Button
               buttonStyle={styles.loginButton}
-              onPress={() => navigation.navigate("Main")}
+              onPress={() => {
+                onLoginPress(), navigation.navigate("Main");
+              }}
               title="Login"
             />
             <Button
