@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, Image } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "./style";
 
 const MainScreen = ({ navigation }) => {
   const [search, setsearch] = useState("");
   const [data, setData] = useState({});
+  const [url, setURL] = useState({});
 
-  const searchFood = async (event) => {
-    console.log("searchFood function called");
+  const searchLocation = async (event) => {
+    console.log("searchLocation function called");
 
     const options = {
       method: "GET",
@@ -24,14 +25,12 @@ const MainScreen = ({ navigation }) => {
     try {
       try {
         const response = await axios.request(options);
-        console.log(response.data.length + " Items");
-
-        if (response.data.length > 1) {
-          console.log(response.data.length + " Items");
-        }
 
         setData(response.data[0]);
         console.log(response.data);
+        console.log(response.data.data.image_url);
+        setURL(response.data.data.image_url);
+        console.log(url);
       } catch (error) {
         console.error(error);
       }
@@ -44,7 +43,9 @@ const MainScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text style={styles.logoText}>Search For Your Destination!</Text>
+      <Text>
+        <Text style={styles.logoText}>Search For Your Destination!</Text>
+      </Text>
       <Button
         title="Go back to Login"
         onPress={() => navigation.navigate("Login")}
@@ -58,10 +59,13 @@ const MainScreen = ({ navigation }) => {
       />
       <Button
         title="Search"
-        onPress={searchFood}
+        onPress={searchLocation}
         buttonStyle={styles.loginButton}
       />
-      <Text></Text>
+      <Text>
+        <Text style={styles.logoText}>{search}!</Text>
+      </Text>
+      <Image source={{ uri: url }} style={{ width: 200, height: 200 }} />
     </View>
   );
 };

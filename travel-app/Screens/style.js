@@ -5,7 +5,7 @@ const { StyleSheet } = React;
 const styles = StyleSheet.create({
   containerView: {
     flex: 1,
-    alignItems: "center"
+    alignItems: "center",
   },
   loginScreenContainer: {
     flex: 1,
@@ -37,12 +37,12 @@ const styles = StyleSheet.create({
     height: 45,
     marginTop: 10,
     width: 350,
-    alignItems: "center"
+    alignItems: "center",
   },
   fbLoginButton: {
     height: 45,
     marginTop: 10,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
 });
 export default styles;
