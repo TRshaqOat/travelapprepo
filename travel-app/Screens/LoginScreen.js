@@ -9,6 +9,7 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   View,
+  Image,
 } from "react-native";
 import { Button, SocialIcon } from "react-native-elements";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -35,7 +36,10 @@ const LoginScreen = ({ navigation }) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.loginScreenContainer}>
           <View style={styles.loginFormView}>
-            <Text style={styles.logoText}>Travel Planner</Text>
+            <Image
+              style={styles.logo}
+              source={require("travel-app/logo.png")}
+            />
             <TextInput
               placeholder="Username"
               placeholderColor="#c4c3cb"
@@ -53,14 +57,10 @@ const LoginScreen = ({ navigation }) => {
             />
             <Button
               buttonStyle={styles.loginButton}
-              onPress={() => navigation.navigate("Main")}
+              onPress={() => {
+                onLoginPress(), navigation.navigate("Main");
+              }}
               title="Login"
-            />
-            <Button
-              containerStyle={styles.fbLoginButton}
-              type="clear"
-              onPress={() => onFbLoginPress()}
-              title="Login With Google"
             />
           </View>
         </View>

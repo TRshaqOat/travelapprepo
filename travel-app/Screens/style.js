@@ -28,21 +28,23 @@ const styles = StyleSheet.create({
     borderColor: "#eaeaea",
     backgroundColor: "#fafafa",
     paddingLeft: 10,
-    marginTop: 5,
+    marginTop: 10,
     marginBottom: 5,
   },
   loginButton: {
-    backgroundColor: "#3897f1",
+    backgroundColor: "#015c56",
     borderRadius: 5,
     height: 45,
     marginTop: 10,
     width: 350,
     alignItems: "center",
   },
-  fbLoginButton: {
-    height: 45,
-    marginTop: 10,
-    backgroundColor: "transparent",
+  logo: {
+    width: 325,
+    height: 325,
+    marginStart: 13,
+    marginTop: 60,
+    marginBottom: 100,
   },
 });
 export default styles;
