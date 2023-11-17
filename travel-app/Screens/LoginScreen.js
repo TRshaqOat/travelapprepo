@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Logo from "../assets/logo.png";
 
 import styles from "./style";
 import {
@@ -36,10 +37,7 @@ const LoginScreen = ({ navigation }) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.loginScreenContainer}>
           <View style={styles.loginFormView}>
-            <Image
-              style={styles.logo}
-              source={require("travel-app/logo.png")}
-            />
+            <Image style={styles.logo} source={Logo} />
             <TextInput
               placeholder="Username"
               placeholderColor="#c4c3cb"
