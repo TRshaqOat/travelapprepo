@@ -8,6 +8,7 @@ const MainScreen = ({ navigation }) => {
   const [search, setsearch] = useState("");
   const [data, setData] = useState({});
   const [url, setURL] = useState({});
+  const [weatherData, setWeatherData] = useState(null);
 
   const searchLocation = async (event) => {
     console.log("searchLocation function called");
@@ -41,6 +42,26 @@ const MainScreen = ({ navigation }) => {
     }
   };
 
+  const fetchWeatherData = async () => {
+    const options = {
+      method: "GET",
+      url: "https://weatherapi-com.p.rapidapi.com/current.json",
+      params: { q: search },
+      headers: {
+        "X-RapidAPI-Key": "28622ab15emsh37de7c04fb42d0bp134858jsnbee14dcb0847",
+        "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      setWeatherData(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <View>
       <Text>
@@ -59,7 +80,10 @@ const MainScreen = ({ navigation }) => {
       />
       <Button
         title="Search"
-        onPress={searchLocation}
+        onPress={() => {
+          searchLocation();
+          fetchWeatherData();
+        }}
         buttonStyle={styles.loginButton}
       />
       <Text>
