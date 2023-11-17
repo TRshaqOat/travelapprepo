@@ -9,7 +9,9 @@ const MainScreen = ({ navigation }) => {
   const [data, setData] = useState({});
   const [url, setURL] = useState({});
   const [weatherData, setWeatherData] = useState(null);
-
+  const [images, setimages] = useState({});
+  
+  
   const searchLocation = async (event) => {
     console.log("searchLocation function called");
 
@@ -31,7 +33,8 @@ const MainScreen = ({ navigation }) => {
         console.log(response.data);
         console.log(response.data.data.image_url);
         setURL(response.data.data.image_url);
-        console.log(url);
+        setimages(response.data.data.country_images);
+        console.log(images);
       } catch (error) {
         console.error(error);
       }
