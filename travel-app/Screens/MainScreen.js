@@ -13,7 +13,7 @@ const MainScreen = ({ navigation }) => {
 
   const [weatherData, setWeatherData] = useState(null);
   const [images, setimages] = useState({});
-  
+
   const searchLocation = async (event) => {
     console.log("searchLocation function called");
 
@@ -43,6 +43,7 @@ const MainScreen = ({ navigation }) => {
           imagesArray.push({ imageUrl, title });
         }
         console.log(imagesArray);
+        console.log(imagesArray[0].imageUrl);
       } catch (error) {
         console.error(error);
       }
@@ -101,7 +102,7 @@ const MainScreen = ({ navigation }) => {
         <Text style={styles.logoText}>{search}!</Text>
       </Text>
       <Image source={{ uri: url }} style={{ width: 200, height: 200 }} />
-      <Carousel data={imagesArray} />
+      <Carousel imagesArray={imagesArray} sample={"a"} />
     </View>
   );
 };
