@@ -3,6 +3,7 @@ import axios from "axios";
 import { View, Text, Button, Image } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "./style";
+import Carousel from "../Components/Carousel";
 
 const MainScreen = ({ navigation }) => {
   const [search, setsearch] = useState("");
@@ -32,7 +33,7 @@ const MainScreen = ({ navigation }) => {
         setURL(response.data.data.image_url);
 
         for (let i = 0; i < response.data.data.country_images.length; i++) {
-          const imageUrl = response.data.data.country_images[i].image_url; // Adjust the property name if needed
+          const imageUrl = response.data.data.country_images[i].imageUrl; // Adjust the property name if needed
           const title = response.data.data.country_images[i].title; // Adjust the property name if needed
 
           // Create an object and push it to the imagesArray
@@ -74,6 +75,7 @@ const MainScreen = ({ navigation }) => {
         <Text style={styles.logoText}>{search}!</Text>
       </Text>
       <Image source={{ uri: url }} style={{ width: 200, height: 200 }} />
+      <Carousel data={imagesArray} />
     </View>
   );
 };
