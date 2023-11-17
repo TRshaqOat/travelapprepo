@@ -8,7 +8,7 @@ const MainScreen = ({ navigation }) => {
   const [search, setsearch] = useState("");
   const [data, setData] = useState({});
   const [url, setURL] = useState({});
-  const [images, setimages] = useState({});
+  const imagesArray = [];
 
   const searchLocation = async (event) => {
     console.log("searchLocation function called");
@@ -29,10 +29,16 @@ const MainScreen = ({ navigation }) => {
 
         setData(response.data[0]);
         console.log(response.data);
-        console.log(response.data.data.image_url);
         setURL(response.data.data.image_url);
-        setimages(response.data.data.country_images);
-        console.log(images);
+
+        for (let i = 0; i < response.data.data.country_images.length; i++) {
+          const imageUrl = response.data.data.country_images[i].image_url; // Adjust the property name if needed
+          const title = response.data.data.country_images[i].title; // Adjust the property name if needed
+
+          // Create an object and push it to the imagesArray
+          imagesArray.push({ imageUrl, title });
+        }
+        console.log(imagesArray);
       } catch (error) {
         console.error(error);
       }
