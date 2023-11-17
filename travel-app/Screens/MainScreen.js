@@ -13,7 +13,7 @@ const MainScreen = ({ navigation }) => {
 
   const [weatherData, setWeatherData] = useState(null);
   const [images, setimages] = useState({});
-  
+
   const searchLocation = async (event) => {
     console.log("searchLocation function called");
 
@@ -102,6 +102,12 @@ const MainScreen = ({ navigation }) => {
       </Text>
       <Image source={{ uri: url }} style={{ width: 200, height: 200 }} />
       <Carousel data={imagesArray} />
+      <Button
+        title="Go to Saved Locations"
+        onPress={() => {
+          navigation.navigate("Saved");
+        }}
+      />
     </View>
   );
 };

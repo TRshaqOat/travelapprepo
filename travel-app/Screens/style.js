@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     marginTop: 150,
     marginBottom: 30,
     textAlign: "center",
+    alignItems: "center",
   },
   loginFormView: {
     flex: 1,
