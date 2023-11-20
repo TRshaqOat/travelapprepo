@@ -85,7 +85,7 @@ const MainScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text style={styles.searchText}>Search For Some Destination!</Text>
+      <Text style={styles.searchText}>Search For Any Destination!</Text>
       <TextInput
         value={search}
         onChangeText={(text) => setsearch(text)}
@@ -104,6 +104,33 @@ const MainScreen = ({ navigation }) => {
       </TouchableOpacity>
       {/* <Image source={{ uri: url }} style={{ width: 200, height: 200 }} /> */}
       <Carousel imagesArray={imagesArray} />
+
+      {imagesArray.length > 0 ? (
+        <>
+          <View style={styles.weatherInfoSection}>
+            <View style={styles.weatherInfoItem}>
+              <Text style={styles.weatherInfoLabel}>Feels Like</Text>
+              <Text style={styles.weatherInfoValue}>
+                {weatherData.current.feelslike_f}ºF
+              </Text>
+            </View>
+            <View style={styles.weatherInfoItem}>
+              <Text style={styles.weatherInfoLabel}>Actual Temp</Text>
+              <Text style={styles.weatherInfoValue}>
+                {weatherData.current.temp_f}ºF
+              </Text>
+            </View>
+            <View style={styles.weatherInfoItem}>
+              <Text style={styles.weatherInfoLabel}>Precipitation</Text>
+              <Text style={styles.weatherInfoValue}>
+                {weatherData.current.precip_in} inches
+              </Text>
+            </View>
+          </View>
+        </>
+      ) : (
+        <Text></Text>
+      )}
 
       <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.container}>
@@ -159,16 +186,17 @@ const MainScreen = ({ navigation }) => {
           </View>
         </View>
       </SafeAreaView>
-      <Button
-        buttonStyle={styles.mainButtons}
-        title="Go to Rated Locations"
+      <TouchableOpacity
+        style={styles.searchButton}
         onPress={() => {
           navigation.navigate("Rated", {
             ratingNum: starRating,
             location: search,
           });
         }}
-      />
+      >
+        <Text style={styles.searchButtonText}>Go to Rated Locations</Text>
+      </TouchableOpacity>
     </View>
   );
 };
