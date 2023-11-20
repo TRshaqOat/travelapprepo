@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { View, Text, Button, Image } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
+import { Button, SocialIcon } from "react-native-elements";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "./style";
 import Carousel from "../Components/Carousel";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const MainScreen = ({ navigation }) => {
   const [search, setsearch] = useState("");
   const [data, setData] = useState({});
   const [url, setURL] = useState({});
+  const [starRating, setStarRating] = useState(null);
   const imagesArray = [];
 
   const [weatherData, setWeatherData] = useState(null);
@@ -79,6 +88,7 @@ const MainScreen = ({ navigation }) => {
         <Text style={styles.logoText}>Search For Your Destination!</Text>
       </Text>
       <Button
+        buttonStyle={styles.mainButtons}
         title="Go back to Login"
         onPress={() => navigation.navigate("Login")}
       />
@@ -102,10 +112,69 @@ const MainScreen = ({ navigation }) => {
       </Text>
       <Image source={{ uri: url }} style={{ width: 200, height: 200 }} />
       <Carousel data={imagesArray} />
+
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <Text style={styles.heading}>
+            {starRating ? `${starRating}*` : "Tap to rate"}
+          </Text>
+          <View style={styles.stars}>
+            <TouchableOpacity onPress={() => setStarRating(1)}>
+              <MaterialIcons
+                name={starRating >= 1 ? "star" : "star-border"}
+                size={32}
+                style={
+                  starRating >= 1 ? styles.starSelected : styles.starUnselected
+                }
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setStarRating(2)}>
+              <MaterialIcons
+                name={starRating >= 2 ? "star" : "star-border"}
+                size={32}
+                style={
+                  starRating >= 2 ? styles.starSelected : styles.starUnselected
+                }
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setStarRating(3)}>
+              <MaterialIcons
+                name={starRating >= 3 ? "star" : "star-border"}
+                size={32}
+                style={
+                  starRating >= 3 ? styles.starSelected : styles.starUnselected
+                }
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setStarRating(4)}>
+              <MaterialIcons
+                name={starRating >= 4 ? "star" : "star-border"}
+                size={32}
+                style={
+                  starRating >= 4 ? styles.starSelected : styles.starUnselected
+                }
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setStarRating(5)}>
+              <MaterialIcons
+                name={starRating >= 5 ? "star" : "star-border"}
+                size={32}
+                style={
+                  starRating >= 5 ? styles.starSelected : styles.starUnselected
+                }
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </SafeAreaView>
       <Button
-        title="Go to Saved Locations"
+        buttonStyle={styles.mainButtons}
+        title="Go to Rated Locations"
         onPress={() => {
-          navigation.navigate("Saved");
+          navigation.navigate("Rated", {
+            ratingNum: starRating,
+            location: search,
+          });
         }}
       />
     </View>

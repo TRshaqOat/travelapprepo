@@ -14,7 +14,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Main" component={MainScreen} />
-        <Stack.Screen name="Saved" component={SavedScreen} />
+        <Stack.Screen name="Rated" component={SavedScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

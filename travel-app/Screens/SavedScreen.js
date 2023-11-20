@@ -2,18 +2,15 @@ import React, { useState } from "react";
 import { View, Text, Button, Image } from "react-native";
 import styles from "./style";
 
-const SavedScreen = ({ navigation }) => {
-  const [search, setsearch] = useState("");
-  const [data, setData] = useState({});
-  const [url, setURL] = useState({});
+const SavedScreen = ({ route, navigation }) => {
+  const { ratingNum, location } = route.params;
   const imagesArray = [];
 
-  const [weatherData, setWeatherData] = useState(null);
-  const [images, setimages] = useState({});
-
   return (
-    <View>
-      <Text>hello</Text>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Details Screen</Text>
+      <Text>itemId: {JSON.stringify(ratingNum)}</Text>
+      <Text>otherParam: {JSON.stringify(location)}</Text>
     </View>
   );
 };
