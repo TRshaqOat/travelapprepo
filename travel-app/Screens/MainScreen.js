@@ -20,13 +20,11 @@ const MainScreen = ({ navigation }) => {
   const [url, setURL] = useState({});
   const [imagesArray, setImagesArray] = useState([]);
   const [starRating, setStarRating] = useState(null);
-  const imagesArray = [];
 
   const [weatherData, setWeatherData] = useState(null);
   const [images, setimages] = useState({});
 
   useEffect(() => {}, [imagesArray]);
-
 
   const searchLocation = async (event) => {
     console.log("searchLocation function called");
