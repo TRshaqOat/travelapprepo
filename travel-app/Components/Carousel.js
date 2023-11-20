@@ -22,12 +22,12 @@ const Carousel = ({ imagesArray }) => {
             <Image
               source={{ uri: imagesArray[currentIndex].imageUrl }}
               style={styles.image}
-              resizeMode="cover"
+              resizeMode="contain"
             />
             <Text style={styles.title}>{imagesArray[currentIndex].title}</Text>
           </>
         ) : (
-          <Text>Loading images...</Text>
+          <Text style={styles.waitText}>Images Will Appear Shortly...</Text>
         )}
       </View>
 
@@ -53,22 +53,29 @@ const styles = StyleSheet.create({
     width: "80%",
     height: "60%",
     overflow: "hidden",
-    borderRadius: 10,
+    borderRadius: 20,
     marginBottom: 10,
   },
   image: {
     width: "100%",
     height: "100%",
+    aspectRatio: 16 / 9,
+    borderRadius: 20,
   },
   title: {
     position: "absolute",
     bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
     color: "white",
     padding: 10,
     textAlign: "center",
+    fontWeight: "bold",
+    borderRadius: 20,
+    fontSize: 20,
+    width: "80%",
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
   },
   buttonsContainer: {
     flexDirection: "row",
@@ -76,13 +83,20 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   button: {
-    backgroundColor: "#3498db",
-    padding: 10,
+    backgroundColor: "#015c56",
+    padding: 20,
     borderRadius: 5,
   },
   buttonText: {
     color: "white",
-    fontSize: 20,
+    fontSize: 25,
+  },
+  waitText: {
+    textAlign: "center",
+    color: "black",
+    fontSize: 25,
+    marginTop: 40,
+    fontWeight: "bold",
   },
 });
 

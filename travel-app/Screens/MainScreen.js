@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { View, Text, Button, Image } from "react-native";
+import { View, Text, Button, Image, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import stylesMain from "./style";
+import styles from "./style";
 import Carousel from "../Components/Carousel";
 
 const MainScreen = ({ navigation }) => {
@@ -14,9 +14,7 @@ const MainScreen = ({ navigation }) => {
   const [weatherData, setWeatherData] = useState(null);
   const [images, setimages] = useState({});
 
-  useEffect(() => {
-    console.log("imagesArray updated:", imagesArray);
-  }, [imagesArray]);
+  useEffect(() => {}, [imagesArray]);
 
   const searchLocation = async (event) => {
     console.log("searchLocation function called");
@@ -47,21 +45,14 @@ const MainScreen = ({ navigation }) => {
           newArray.push({ imageUrl, title });
         }
         setImagesArray(newArray);
-
-        console.log(imagesArray);
       } catch (error) {
         console.error(error);
       }
       setsearch("");
-      console.log(imagesArray);
     } catch (error) {
       console.error("Error:", error);
     }
   };
-  if (imagesArray.length == 0) {
-    console.log("false");
-  }
-  console.log(imagesArray);
 
   const fetchWeatherData = async () => {
     const options = {
@@ -85,32 +76,24 @@ const MainScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text>
-        <Text style={stylesMain.logoText}>Search For Your Destination!</Text>
-      </Text>
-      <Button
-        title="Go back to Login"
-        onPress={() => navigation.navigate("Login")}
-      />
+      <Text style={styles.searchText}>Search For Some Destination!</Text>
       <TextInput
         value={search}
         onChangeText={(text) => setsearch(text)}
         placeholder="Enter Vacation Location"
         type="text"
-        style={stylesMain.loginFormTextInput}
+        style={styles.searchTextInput}
       />
-      <Button
-        title="Search"
+      <TouchableOpacity
+        style={styles.searchButton}
         onPress={() => {
           searchLocation();
           fetchWeatherData();
         }}
-        buttonStyle={stylesMain.loginButton}
-      />
-      <Text>
-        <Text style={stylesMain.logoText}>{search}!</Text>
-      </Text>
-      <Image source={{ uri: url }} style={{ width: 200, height: 200 }} />
+      >
+        <Text style={styles.searchButtonText}>Search</Text>
+      </TouchableOpacity>
+      {/* <Image source={{ uri: url }} style={{ width: 200, height: 200 }} /> */}
       <Carousel imagesArray={imagesArray} />
     </View>
   );
