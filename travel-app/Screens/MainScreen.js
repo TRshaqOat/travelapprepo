@@ -12,7 +12,7 @@ import { TextInput } from "react-native-gesture-handler";
 import styles from "./style";
 import Carousel from "../Components/Carousel";
 import { MaterialIcons } from "@expo/vector-icons";
-import { db } from "../config/firebase";
+import { travelDB } from "../config/firedatabase";
 
 const MainScreen = ({ navigation }) => {
   const [search, setsearch] = useState("");
@@ -87,10 +87,9 @@ const MainScreen = ({ navigation }) => {
 
   const setDataInFirestore = async () => {
     try {
-      const docRef = doc(db, "user", location);
+      const docRef = doc(travelDB, "user", location);
 
-      // Set the document data using setDoc for each item in the array.
-      await setDoc(docRef, item);
+      await setDoc(docRef);
     } catch (error) {
       console.error("error", error);
     }
