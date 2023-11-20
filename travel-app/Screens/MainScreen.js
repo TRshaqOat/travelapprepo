@@ -3,7 +3,6 @@ import axios from "axios";
 import {
   View,
   Text,
-  Button,
   Image,
   TouchableOpacity,
   SafeAreaView,
