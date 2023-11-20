@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 
-const Carousel = ({ imagesArray, sample }) => {
-  console.log(imagesArray);
-  console.log(sample);
+const Carousel = ({ imagesArray }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const showNextImage = () => {
@@ -19,12 +17,18 @@ const Carousel = ({ imagesArray, sample }) => {
   return (
     <View style={styles.carouselContainer}>
       <View style={styles.imageContainer}>
-        <Image
-          //source={{ uri: imagesArray[currentIndex].imageUrl }}
-          style={styles.image}
-          resizeMode="cover"
-        />
-        {/* <Text style={styles.title}>{imagesArray[currentIndex].title}</Text> */}
+        {imagesArray.length > 0 ? (
+          <>
+            <Image
+              source={{ uri: imagesArray[currentIndex].imageUrl }}
+              style={styles.image}
+              resizeMode="cover"
+            />
+            <Text style={styles.title}>{imagesArray[currentIndex].title}</Text>
+          </>
+        ) : (
+          <Text>Loading images...</Text>
+        )}
       </View>
 
       <View style={styles.buttonsContainer}>

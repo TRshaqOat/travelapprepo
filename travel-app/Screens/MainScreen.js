@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { View, Text, Button, Image } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import styles from "./style";
+import stylesMain from "./style";
 import Carousel from "../Components/Carousel";
 
 const MainScreen = ({ navigation }) => {
   const [search, setsearch] = useState("");
   const [data, setData] = useState({});
   const [url, setURL] = useState({});
-  const imagesArray = [];
+  const [imagesArray, setImagesArray] = useState([]);
 
   const [weatherData, setWeatherData] = useState(null);
   const [images, setimages] = useState({});
+
+  useEffect(() => {
+    console.log("imagesArray updated:", imagesArray);
+  }, [imagesArray]);
 
   const searchLocation = async (event) => {
     console.log("searchLocation function called");
@@ -34,25 +38,30 @@ const MainScreen = ({ navigation }) => {
         setData(response.data[0]);
         console.log(response.data);
         setURL(response.data.data.image_url);
+        const newArray = [];
 
         for (let i = 0; i < response.data.data.country_images.length; i++) {
           const imageUrl = response.data.data.country_images[i].imageUrl; // Adjust the property name if needed
           const title = response.data.data.country_images[i].title; // Adjust the property name if needed
 
-          // Create an object and push it to the imagesArray
-          imagesArray.push({ imageUrl, title });
+          newArray.push({ imageUrl, title });
         }
+        setImagesArray(newArray);
+
         console.log(imagesArray);
-        console.log(imagesArray[0].imageUrl);
       } catch (error) {
         console.error(error);
       }
-
       setsearch("");
+      console.log(imagesArray);
     } catch (error) {
       console.error("Error:", error);
     }
   };
+  if (imagesArray.length == 0) {
+    console.log("false");
+  }
+  console.log(imagesArray);
 
   const fetchWeatherData = async () => {
     const options = {
@@ -77,7 +86,7 @@ const MainScreen = ({ navigation }) => {
   return (
     <View>
       <Text>
-        <Text style={styles.logoText}>Search For Your Destination!</Text>
+        <Text style={stylesMain.logoText}>Search For Your Destination!</Text>
       </Text>
       <Button
         title="Go back to Login"
@@ -88,7 +97,7 @@ const MainScreen = ({ navigation }) => {
         onChangeText={(text) => setsearch(text)}
         placeholder="Enter Vacation Location"
         type="text"
-        style={styles.loginFormTextInput}
+        style={stylesMain.loginFormTextInput}
       />
       <Button
         title="Search"
@@ -96,13 +105,13 @@ const MainScreen = ({ navigation }) => {
           searchLocation();
           fetchWeatherData();
         }}
-        buttonStyle={styles.loginButton}
+        buttonStyle={stylesMain.loginButton}
       />
       <Text>
-        <Text style={styles.logoText}>{search}!</Text>
+        <Text style={stylesMain.logoText}>{search}!</Text>
       </Text>
       <Image source={{ uri: url }} style={{ width: 200, height: 200 }} />
-      <Carousel imagesArray={imagesArray} sample={"a"} />
+      <Carousel imagesArray={imagesArray} />
     </View>
   );
 };
