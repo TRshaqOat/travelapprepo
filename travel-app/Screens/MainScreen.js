@@ -15,6 +15,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 const MainScreen = ({ navigation }) => {
   const [search, setsearch] = useState("");
+  const [location, setLocation] = useState("");
   const [data, setData] = useState({});
   const [url, setURL] = useState({});
   const [imagesArray, setImagesArray] = useState([]);
@@ -27,7 +28,7 @@ const MainScreen = ({ navigation }) => {
 
   const searchLocation = async (event) => {
     console.log("searchLocation function called");
-
+    setLocation(search);
     const options = {
       method: "GET",
       url: "https://travel-info-api.p.rapidapi.com/country",
@@ -191,7 +192,7 @@ const MainScreen = ({ navigation }) => {
         onPress={() => {
           navigation.navigate("Rated", {
             ratingNum: starRating,
-            location: search,
+            location: location,
           });
         }}
       >
