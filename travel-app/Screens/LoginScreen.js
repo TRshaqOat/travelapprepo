@@ -58,7 +58,7 @@ const LoginScreen = ({ navigation }) => {
               onPress={() => {
                 onLoginPress(), navigation.navigate("Main");
               }}
-              title="Login"
+              title="Sign Up"
             />
           </View>
         </View>
