@@ -106,5 +106,10 @@ const styles = StyleSheet.create({
     width: 350,
     alignItems: "center",
   },
+  item: {
+    padding: 20,
+    fontSize: 15,
+    marginTop: 5,
+  },
 });
 export default styles;
