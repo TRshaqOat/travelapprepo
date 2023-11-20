@@ -12,6 +12,7 @@ import { TextInput } from "react-native-gesture-handler";
 import styles from "./style";
 import Carousel from "../Components/Carousel";
 import { MaterialIcons } from "@expo/vector-icons";
+import { db } from "../config/firebase";
 
 const MainScreen = ({ navigation }) => {
   const [search, setsearch] = useState("");
@@ -81,6 +82,17 @@ const MainScreen = ({ navigation }) => {
       console.log(response.data);
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const setDataInFirestore = async () => {
+    try {
+      const docRef = doc(db, "user", location);
+
+      // Set the document data using setDoc for each item in the array.
+      await setDoc(docRef, item);
+    } catch (error) {
+      console.error("error", error);
     }
   };
 
@@ -190,6 +202,7 @@ const MainScreen = ({ navigation }) => {
       <TouchableOpacity
         style={styles.searchButton}
         onPress={() => {
+          setDataInFirestore();
           navigation.navigate("Rated", {
             ratingNum: starRating,
             location: location,
