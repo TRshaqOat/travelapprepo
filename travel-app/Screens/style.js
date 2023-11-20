@@ -11,10 +11,11 @@ const styles = StyleSheet.create({
   loginScreenContainer: {
     flex: 1,
   },
-  logoText: {
+  searchText: {
+    textAlign: "center",
     fontSize: 40,
     fontWeight: "800",
-    marginTop: 150,
+    marginTop: 100,
     marginBottom: 30,
     textAlign: "center",
     alignItems: "center",
@@ -32,6 +33,33 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginTop: 10,
     marginBottom: 5,
+  },
+  searchTextInput: {
+    height: 50,
+    width: "80%",
+    fontSize: 20,
+    borderRadius: 5,
+    borderWidth: 3,
+    borderColor: "#eaeaea",
+    backgroundColor: "#fafafa",
+    paddingLeft: 10,
+    marginTop: 15,
+    marginBottom: 10,
+    alignSelf: "center",
+  },
+  searchButton: {
+    backgroundColor: "#015c56",
+    borderRadius: 5,
+    height: 45,
+    marginTop: 10,
+    width: 350,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+  },
+  searchButtonText: {
+    color: "white",
+    fontSize: 18,
   },
   loginButton: {
     backgroundColor: "#015c56",

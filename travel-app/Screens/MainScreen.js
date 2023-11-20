@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   View,
   Text,
+  Button,
   Image,
   TouchableOpacity,
   SafeAreaView,
@@ -17,11 +18,15 @@ const MainScreen = ({ navigation }) => {
   const [search, setsearch] = useState("");
   const [data, setData] = useState({});
   const [url, setURL] = useState({});
+  const [imagesArray, setImagesArray] = useState([]);
   const [starRating, setStarRating] = useState(null);
   const imagesArray = [];
 
   const [weatherData, setWeatherData] = useState(null);
   const [images, setimages] = useState({});
+
+  useEffect(() => {}, [imagesArray]);
+
 
   const searchLocation = async (event) => {
     console.log("searchLocation function called");
@@ -43,19 +48,18 @@ const MainScreen = ({ navigation }) => {
         setData(response.data[0]);
         console.log(response.data);
         setURL(response.data.data.image_url);
+        const newArray = [];
 
         for (let i = 0; i < response.data.data.country_images.length; i++) {
           const imageUrl = response.data.data.country_images[i].imageUrl; // Adjust the property name if needed
           const title = response.data.data.country_images[i].title; // Adjust the property name if needed
 
-          // Create an object and push it to the imagesArray
-          imagesArray.push({ imageUrl, title });
+          newArray.push({ imageUrl, title });
         }
-        console.log(imagesArray);
+        setImagesArray(newArray);
       } catch (error) {
         console.error(error);
       }
-
       setsearch("");
     } catch (error) {
       console.error("Error:", error);
@@ -84,34 +88,25 @@ const MainScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text>
-        <Text style={styles.logoText}>Search For Your Destination!</Text>
-      </Text>
-      <Button
-        buttonStyle={styles.mainButtons}
-        title="Go back to Login"
-        onPress={() => navigation.navigate("Login")}
-      />
+      <Text style={styles.searchText}>Search For Some Destination!</Text>
       <TextInput
         value={search}
         onChangeText={(text) => setsearch(text)}
         placeholder="Enter Vacation Location"
         type="text"
-        style={styles.loginFormTextInput}
+        style={styles.searchTextInput}
       />
-      <Button
-        title="Search"
+      <TouchableOpacity
+        style={styles.searchButton}
         onPress={() => {
           searchLocation();
           fetchWeatherData();
         }}
-        buttonStyle={styles.loginButton}
-      />
-      <Text>
-        <Text style={styles.logoText}>{search}!</Text>
-      </Text>
-      <Image source={{ uri: url }} style={{ width: 200, height: 200 }} />
-      <Carousel data={imagesArray} />
+      >
+        <Text style={styles.searchButtonText}>Search</Text>
+      </TouchableOpacity>
+      {/* <Image source={{ uri: url }} style={{ width: 200, height: 200 }} /> */}
+      <Carousel imagesArray={imagesArray} />
 
       <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.container}>
