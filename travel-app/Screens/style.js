@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
+    marginBottom: 20,
   },
   searchButtonText: {
     color: "white",
@@ -87,6 +88,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontWeight: "bold",
     marginBottom: 20,
+    marginTop: 20,
+    paddingTop: 10,
   },
   stars: {
     display: "flex",
@@ -105,6 +108,33 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: 350,
     alignItems: "center",
+    alignSelf: "center",
+  },
+
+  weatherInfoSection: {
+    backgroundColor: "rgba(1, 92, 86, 1)", // Opacity added to the background color
+    borderRadius: 10,
+    padding: 10,
+    marginTop: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "80%",
+    alignSelf: "center",
+  },
+  weatherInfoItem: {
+    flex: 1,
+    alignItems: "center",
+  },
+  weatherInfoLabel: {
+    paddingTop: 10,
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  weatherInfoValue: {
+    paddingBottom: 10,
+    color: "white",
+    fontSize: 20,
   },
 });
 export default styles;
